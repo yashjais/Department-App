@@ -52,7 +52,8 @@ const userSchema = new Schema({
     ],
     department: {
         type: Schema.Types.ObjectId,
-        ref: "Department"
+        ref: 'Department',
+        required: true
     },
     role: {
         type: String,

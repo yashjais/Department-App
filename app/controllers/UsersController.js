@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const _ = require('lodash')
+const Department = require('../models/Department')
 
 module.exports.login = (req, res) => {
     const body = req.body
@@ -28,7 +29,17 @@ module.exports.register = (req, res) => {
     user.save()
         .then(user => {
             // console.log(user.isNew)
-            res.json(_.pick(user, ['_id', 'userName', 'email', 'role']))
+            return Department.findOne({_id: user.department})
+            // res.json(_.pick(user, ['_id', 'userName', 'email', 'role', 'department']))
+        })
+        .then(dep => {
+            console.log('pushing', _.pick(user, ['_id', 'userName', 'email']))
+            dep.users.push(_.pick(user, ['_id', 'userName', 'email']))
+            return dep.save()
+        })
+        .then(dep => {
+            console.log('dep', dep)
+            res.send(user)
         })
         .catch(err => {
             res.json(err)
@@ -37,7 +48,7 @@ module.exports.register = (req, res) => {
  
 module.exports.account = function(req, res){
     const { user } = req
-    res.send(_.pick(user, ['_id', 'userName', 'email']))
+    res.send(_.pick(user, ['_id', 'userName', 'email', 'role', 'department']))
 }
 
 module.exports.logout = function(req, res) {
