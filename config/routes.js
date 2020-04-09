@@ -4,6 +4,7 @@ const router = express.Router()
 const authenticateUser = require('../app/middlewares/authentication')
 const usersController = require('../app/controllers/UsersController')
 const departmentsController = require('../app/controllers/DepartmentsController')
+const requestsController = require('../app/controllers/RequestsController')
 
 router.post('/users/register', usersController.register)
 router.post('/users/login', usersController.login)
@@ -12,5 +13,8 @@ router.delete('/users/logout', authenticateUser, usersController.logout)
 
 router.get('/departments', authenticateUser, departmentsController.list)
 router.post('/departments', authenticateUser, departmentsController.create)
+
+router.get('/requests', authenticateUser, requestsController.list)
+router.post('/requests', authenticateUser, requestsController.create)
 
 module.exports = router
