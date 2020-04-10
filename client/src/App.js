@@ -1,11 +1,16 @@
 import React from 'react'
 import { BrowserRouter, Link, Route } from 'react-router-dom'
+import axios from './config/axios'
+
 import Home from './Home'
+import Form from './Form'
 
 import Login from './components/Users/Login'
 import Register from './components/Users/Register'
 import Account from './components/Users/Account'
-import axios from './config/axios'
+
+import Request from './components/Requests/Request'
+import Requests from './components/Requests/Requests'
 
 function App(props) {
     const handleLogout = () => {
@@ -33,18 +38,20 @@ function App(props) {
                         {
                            localStorage.getItem('authDepToken') ? (
                                 <React.Fragment> 
-                                    
                                     <li className="nav-item active">
                                         <Link className="nav-link" to="/">Home</Link>
                                     </li>
                                     <li className="nav-item active">
-                                        <Link className="nav-link" to="/requests-individualPending">Pending</Link> 
+                                        <Link className="nav-link" to="/form">Form</Link>
                                     </li>
                                     <li className="nav-item active">
-                                        <Link className="nav-link" to="/requests-individualApproved">Approved</Link> 
+                                        <Link className="nav-link" to="/requests/pending">Pending</Link> 
                                     </li>
                                     <li className="nav-item active">
-                                        <Link className="nav-link" to="/requests-individualRejected">Rejected</Link> 
+                                        <Link className="nav-link" to="/requests/approved">Approved</Link> 
+                                    </li>
+                                    <li className="nav-item active">
+                                        <Link className="nav-link" to="/requests/rejected">Rejected</Link> 
                                     </li>
                                     <li className="nav-item active">
                                         <Link className="nav-link" to="/requests">Request(for Approval)</Link> 
@@ -74,17 +81,18 @@ function App(props) {
                     </ul>
                 </div>
             </nav>
-
+                    
             <Route path="/" component={Home} exact={true} />
+            <Route path="/form" component={Form} exact={true} />
 
             <Route path="/login" component={Login} exact={true} />
             <Route path="/register" component={Register} exact={true} />
             <Route path="/account" component={Account} exact={true} />
 
-            {/* <Route path="/requests-individualPending" />
-            <Route path="/requests-individualApproved"  />
-            <Route path="/requests-individualRejected"  />
-            <Route path="/requests" /> */}
+            <Route path="/requests" component={Request} exact={true}/>
+            <Route path="/requests/pending" component={Requests} />
+            <Route path="/requests/approved" component={Requests}  />
+            <Route path="/requests/rejected" component={Requests}  />
 
             </BrowserRouter>
         </div>

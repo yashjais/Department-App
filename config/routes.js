@@ -11,15 +11,15 @@ router.post('/users/login', usersController.login)
 router.get('/users/account',authenticateUser, usersController.account)
 router.delete('/users/logout', authenticateUser, usersController.logout)
 
-router.get('/departments', departmentsController.list) // can be accessed by all
-router.get('/departments-all', authenticateUser, departmentsController.listAdmin) // give access to only admin
+router.get('/departments', departmentsController.list) // can be accessed by all - only department name are given
+router.get('/departments-all', authenticateUser, departmentsController.listAll) // can be accessed by all authenticated users
 router.post('/departments', authenticateUser, departmentsController.create)
 
 router.get('/requests', authenticateUser, requestsController.list) // search via department
 router.get('/requests-individual', authenticateUser, requestsController.show) // search via user - all the req
-router.get('/requests-individualPending', authenticateUser, requestsController.showPending) // search via user - req that are pending
-router.get('/requests-individualApproved', authenticateUser, requestsController.showApproved) // search via user - req that are approved
-router.get('/requests-individualRejected', authenticateUser, requestsController.showRejected) // search via user - req that are rejected
+router.get('/requests/pending', authenticateUser, requestsController.showPending) // search via user - req that are pending
+router.get('/requests/approved', authenticateUser, requestsController.showApproved) // search via user - req that are approved
+router.get('/requests/rejected', authenticateUser, requestsController.showRejected) // search via user - req that are rejected
 router.post('/requests', authenticateUser, requestsController.create)
 router.put('/requests/:id', authenticateUser, requestsController.update)
 

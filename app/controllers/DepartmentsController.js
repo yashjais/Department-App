@@ -12,15 +12,10 @@ module.exports.list = (req, res) => {
         .catch(err => res.send(err))
 }
 
-module.exports.listAdmin = (req, res) => {
-    if(req.user.role == 'admin') {
+module.exports.listAll = (req, res) => {
         Department.find()
             .then(department => res.send(department))
             .catch(err => res.send(err))
-    } else {
-        res.send('You don\'t have the authority to search department' )
-    }
-   
 }
 
 module.exports.create = (req, res) => {
