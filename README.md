@@ -1,8 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Department-Application
+
+Department-Application is a full stack MERN Application. This site has user-authentication. A particular user belongs to a Department. A user can request to other user but that user should belong to different Department. All the user from a Department can see a request, but only the intended user can accept or reject the request.
+
+
+## Dependencies
+
+### Back-End
+ 
+1. bcrypt: "^3.0.8",
+2. concurrently: "^5.0.2",
+3. cors: "^2.8.5",
+4. express: "^4.17.1",
+5. jsonwebtoken: "^8.5.1",
+6. lodash: "^4.17.15",
+7. mongoose: "^5.8.11",
+8. nodemailer: "^6.4.2",
+9. validator: "^12.2.0"
+10. socket.io: "^2.3.0"
+
+### Front-End
+
+1. axios: "^0.19.2",
+2. react: "^16.12.0",
+3. react-dom: "^16.12.0",
+4. react-redux: "^7.1.3",
+5. react-router-dom: "^5.1.2",
+6. react-scripts: "3.3.0",
+7. sweetalert2: "^9.10.10"
+8. bootstrap: "^4.4.1"  
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run dev`
+
+This command will run both back end and front end development server.
+
+### `nodemon index.js`
+
+This command will run your backend server. And any change in the source file will automatically be detected and server will be restarted.
 
 ### `npm start`
 
@@ -33,7 +70,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
