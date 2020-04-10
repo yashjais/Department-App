@@ -20,7 +20,17 @@ const requestSchema = new Schema({
     status: {
         type: String,
         default: 'pending',
-        enum: ['pending', 'completed']
+        enum: ['pending', 'completed', 'rejected']
+    },
+    department: {
+        type: Schema.Types.ObjectID,
+        ref: 'Department',
+        required: true
+    },
+    message: {
+        type: String,
+        minlength: 3,
+        required: true
     }
 })
 
