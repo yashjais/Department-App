@@ -11,7 +11,8 @@ router.post('/users/login', usersController.login)
 router.get('/users/account',authenticateUser, usersController.account)
 router.delete('/users/logout', authenticateUser, usersController.logout)
 
-router.get('/departments', authenticateUser, departmentsController.list) // give access to only admin
+router.get('/departments', departmentsController.list) // can be accessed by all
+router.get('/departments-all', authenticateUser, departmentsController.listAdmin) // give access to only admin
 router.post('/departments', authenticateUser, departmentsController.create)
 
 router.get('/requests', authenticateUser, requestsController.list) // search via department
