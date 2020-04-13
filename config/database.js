@@ -5,9 +5,9 @@ const setUpDB = () => {
             console.log('connected to db')
         })
         .catch(err => {
-            console.log(err)
+            console.log('here', err)
         })
 
 }
 
-module.exports = setUpDB
+module.exports = setUpDB 

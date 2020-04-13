@@ -12,8 +12,8 @@
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
-      "node": "^12.13.0", 
-      "npm": "^6.12.0" 
+    "node": "^12.13.0",
+    "npm": "^6.12.0"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +28,7 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.7",
     "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "validator": "^13.0.0"
   }
 }
