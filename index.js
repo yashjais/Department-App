@@ -15,7 +15,7 @@ setUpDB()
 //     exposedHeaders: 'x-auth',
 // };
 // app.use(cors(corsOptions))
-const whitelist = ['http://localhost:3000'];
+const whitelist = ['https://yash-dep.herokuapp.com'];
 const corsOptions = {
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1 || !origin) {
