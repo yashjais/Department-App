@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import axios from './config/axios'
 import SocketContext from './socket-context'
@@ -13,31 +13,36 @@ import Account from './components/Users/Account'
 import Request from './components/Requests/Request'
 import Requests from './components/Requests/Requests'
 
+import NotificationShow from './components/Notifications/Show'
+
 function AppSocket(props) {
+    const [notification, setNotification] = useState([])
+
     props.socket.on('modify_request', function(request) {
-        console.log(' modify request ', request)
+        setNotification([...notification, request])
+        // console.log(' modify request ', request)
     })
     
     props.socket.on('create_request', function(request) {
-        console.log(' create request ', request)
+        setNotification([...notification, request])
+        // console.log(' create request ', request)
     })
-    console.log('in props', props)
+    // console.log('in props', props, window.history)
     const handleLogout = () => {
-      axios.delete('/users/logout', {
+      axios.delete('/users/logout', { 
         headers: {
           'x-auth': localStorage.getItem('authDepToken')
         }
       })
         .then(res => {
-          console.log(res.data)
+        //   console.log(res.data)
           localStorage.removeItem('authDepToken')
           window.location.href = "/"
         })
         .catch(err => alert(err))
     }
     const notiHandleClick = () => {
-        console.log('clicked')
-        
+        // console.log('clicked')
     }
     
     return (
@@ -77,10 +82,13 @@ function AppSocket(props) {
                                         <Link className="nav-link" to="#" onClick={handleLogout}> Logout </Link>
                                     </li>
                                     <li className="nav-item active">
-                                    <button type="button" className="btn btn-primary" onClick={notiHandleClick}>
-                                    Notification <span className="badge badge-light">0</span>
+                                    <Link to={{
+                                        pathname: "/notification",
+                                        state: notification
+                                    }}><button type="button" className="btn btn-primary" onClick={notiHandleClick}>
+                                    Notification <span className="badge badge-light">{notification.length}</span>
                                     <span className="sr-only">unread messages</span>
-                                    </button>
+                                    </button></Link>
                                     </li>
                                 </React.Fragment>
                             ) : (
@@ -113,6 +121,8 @@ function AppSocket(props) {
             <Route path="/requests/pending" component={Requests} />
             <Route path="/requests/approved" component={Requests}  />
             <Route path="/requests/rejected" component={Requests}  />
+
+            <Route path="/notification" component={NotificationShow} />
 
             </BrowserRouter>
         </div>

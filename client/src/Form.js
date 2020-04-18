@@ -60,7 +60,7 @@ class FormSocket extends React.Component{
                         // console.log('in if', res)
                         // console.log(this.state)
                         const request = res.data
-                        console.log('in creating req front end', request)
+                        // console.log('in creating req front end', request)
                         this.props.socket.emit('create_request', request)
                         Swal.fire(
                             'Good job!',
