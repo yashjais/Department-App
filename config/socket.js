@@ -1,10 +1,8 @@
-const socket = require('socket.io')
-const server = require('./server')
+// const server = require('../index')
+// const io = socket(server)
 
-const io = socket(server)
+// io.on('connection', function(socket){
+//     console.log('a user connected');
+// });
 
-io.on('connection', client => {
-    client.on('tweet', event);
-});  
-
-module.exports = io
+// module.exports = io

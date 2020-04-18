@@ -1,8 +1,9 @@
 import React from 'react'
 import axios from '../../config/axios'
 import Swal from 'sweetalert2'
+import SocketContext from '../../socket-context'
 
-class Request extends React.Component {
+class RequestSocket extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -47,6 +48,9 @@ class Request extends React.Component {
                 }
             })
                 .then(res => {
+                    const request = res.data
+                    // console.log('data coming', request)
+                    this.props.socket.emit('modify_request', request)
                     const requests = this.state.requests.filter(req => req._id != obj.id)
                     this.setState({requests})
                 })
@@ -109,5 +113,11 @@ class Request extends React.Component {
         )
     }
 }
+
+const Request = props => (
+    <SocketContext.Consumer>
+        {socket => <RequestSocket {...props} socket={socket} />}
+    </SocketContext.Consumer>
+)
 
 export default Request

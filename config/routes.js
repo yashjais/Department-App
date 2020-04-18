@@ -13,7 +13,7 @@ router.delete('/users/logout', authenticateUser, usersController.logout)
 
 router.get('/departments', departmentsController.list) // can be accessed by all - only department name are given
 router.get('/departments-all', authenticateUser, departmentsController.listAll) // can be accessed by all authenticated users
-router.post('/departments', authenticateUser, departmentsController.create)
+router.post('/departments', authenticateUser, departmentsController.create) // can only be accessed by admin
 
 router.get('/requests', authenticateUser, requestsController.list) // search via department
 router.get('/requests-individual', authenticateUser, requestsController.show) // search via user - all the req

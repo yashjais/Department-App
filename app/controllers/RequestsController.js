@@ -1,4 +1,8 @@
 const Request = require('../models/Request')
+// const socket = require('socket.io')
+// const server = require('../../index')
+// const io = socket(server)
+// const io = require('../../index')
 
 module.exports.list = (req, res) => { // requests will be searched on the basis of department
     Request.find({department: req.user.department}).populate('user', ['userName', 'email', 'department']).populate('requestedUser', ['userName', 'email', 'department']).populate('department', ['name'])
@@ -39,7 +43,11 @@ module.exports.create = (req, res) => {
     } else {
         const request = new Request(body)
         request.save()
-            .then(request => res.send(request))
+            .then(request => {
+                
+                res.send(request)
+
+            })
             .catch(err => res.send(err))
     }
 }

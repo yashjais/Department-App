@@ -1,8 +1,9 @@
 import React from 'react'
 import axios from './config/axios'
 import Swal from 'sweetalert2'
+import SocketContext from './socket-context'
 
-class Form extends React.Component{
+class FormSocket extends React.Component{
     constructor() {
         super()
         this.state = {
@@ -58,6 +59,9 @@ class Form extends React.Component{
                     if(res.data != "You can't request to user within same department"){
                         // console.log('in if', res)
                         // console.log(this.state)
+                        const request = res.data
+                        console.log('in creating req front end', request)
+                        this.props.socket.emit('create_request', request)
                         Swal.fire(
                             'Good job!',
                             'Request has been made',
@@ -153,5 +157,11 @@ class Form extends React.Component{
         )
     }
 }
+
+const Form = props => (
+    <SocketContext.Consumer>
+        {socket => <FormSocket {...props} socket={socket} />}
+    </SocketContext.Consumer>
+)
 
 export default Form

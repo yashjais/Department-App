@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import axios from './config/axios'
+import SocketContext from './socket-context'
 
 import Home from './Home'
 import Form from './Form'
@@ -12,7 +13,15 @@ import Account from './components/Users/Account'
 import Request from './components/Requests/Request'
 import Requests from './components/Requests/Requests'
 
-function App(props) {
+function AppSocket(props) {
+    props.socket.on('modify_request', function(request) {
+        console.log(' modify request ', request)
+    })
+    
+    props.socket.on('create_request', function(request) {
+        console.log(' create request ', request)
+    })
+    console.log('in props', props)
     const handleLogout = () => {
       axios.delete('/users/logout', {
         headers: {
@@ -26,6 +35,11 @@ function App(props) {
         })
         .catch(err => alert(err))
     }
+    const notiHandleClick = () => {
+        console.log('clicked')
+        
+    }
+    
     return (
         <div className="container">
             <BrowserRouter>
@@ -61,6 +75,12 @@ function App(props) {
                                     </li>
                                     <li className="nav-item active">
                                         <Link className="nav-link" to="#" onClick={handleLogout}> Logout </Link>
+                                    </li>
+                                    <li className="nav-item active">
+                                    <button type="button" className="btn btn-primary" onClick={notiHandleClick}>
+                                    Notification <span className="badge badge-light">0</span>
+                                    <span className="sr-only">unread messages</span>
+                                    </button>
                                     </li>
                                 </React.Fragment>
                             ) : (
@@ -99,4 +119,10 @@ function App(props) {
     )
 }
 
+const App = props => (
+    <SocketContext.Consumer>
+    {socket => <AppSocket {...props} socket={socket} />}
+    </SocketContext.Consumer>
+  )
+    
 export default App
