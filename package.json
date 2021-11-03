@@ -28,6 +28,6 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.7",
     "socket.io": "^2.3.0",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   }
 }
